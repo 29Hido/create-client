@@ -7,13 +7,11 @@ if [ "$1" ]; then
 fi
 
 if [ "$1" = "next" ]; then
-  yarn create next-app --typescript --eslint ./tmp/app/next
+  yarn create next-app ./tmp/app/next --eslint --no-app --tailwind --typescript --no-src-dir --import-alias="@/*"
   yarn prettier --write ./tmp/app/next
   yarn --cwd ./tmp/app/next add isomorphic-unfetch formik react-query
 
   # Tailwind
-  yarn --cwd ./tmp/app/next add tailwindcss postcss autoprefixer
-  yarn --cwd ./tmp/app/next tailwindcss init -p
   cp ./templates/common/tailwind.config.js ./tmp/app/next
   cp ./templates/common/style.css ./tmp/app/next/styles
 
